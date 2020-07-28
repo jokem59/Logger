@@ -6,9 +6,9 @@ namespace Logger
     {
     private:
         std::string filename;
+        std::ofstream logFile;
 
     public:
-        Log(std::string file) : filename{ file }
-        {}
-    }
+        Log(std::string file);
+    };
 }
