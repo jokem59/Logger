@@ -1,0 +1,3 @@
+// the configured options and settings for Tutorial
+#define LOGGER_VERSION_MAJOR @Logger_VERSION_MAJOR@
+#define LOGGER_VERSION_MINOR @Logger_VERSION_MINOR@

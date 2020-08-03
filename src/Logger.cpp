@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "Logger.h"
+#include "LoggerConfig.h"
 
 Logger::Log::Log(std::string file) : filename{ file }
 {
@@ -19,6 +20,10 @@ Logger::Log::Log(std::string file) : filename{ file }
 
 int main()
 {
+    // report version
+    std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
+              << LOGGER_VERSION_MINOR << std::endl;
+
     Logger::Log foo = Logger::Log::Log("sample.log");
 
     return 0;
