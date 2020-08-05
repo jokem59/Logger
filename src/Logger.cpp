@@ -18,13 +18,22 @@ Logger::Log::Log(std::string file) : filename{ file }
 
 }
 
+Logger::Log::~Log()
+{
+    // Wait and take write mutex
+
+    // Close file
+}
+
 int main()
 {
     // report version
     std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
               << LOGGER_VERSION_MINOR << std::endl;
 
-    Logger::Log foo = Logger::Log::Log("sample.log");
+    Logger::Log foo{"sample.log"};
+
+    foo.Write(Logger::Log::Level::INFO, "Testing", 123, "hahaha");
 
     return 0;
 }

@@ -5,10 +5,10 @@ Param(
 
 if ($build -eq $true)
 {
-    Remove-Item ./build/* -Recurse;
+    Remove-Item $PSScriptRoot/build/* -Recurse;
 }
 
 if ($bin -eq $true)
 {
-    Remote-Item ./bin/* -Recurse;
+    Remote-Item $PSScriptRoot/bin/* -Recurse;
 }
