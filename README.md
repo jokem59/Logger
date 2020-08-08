@@ -8,19 +8,28 @@ Calling subsequent constructors on std::ofstream with the same file name result 
 
 ## CMake Learnings
   - Whichever directory 'cmake' is called from is where the build files will be generated.
-    - [X] How do you specify where you want build files to go in CMakeLists.txt?
-      - You don't, cmake builds in whatever directory 'cmake' is called from
+    - How do you specify where you want build files to go in CMakeLists.txt?  You don't.  CMake builds in whatever directory 'cmake' is called from
 
 ## C++ Learnings
 
-- Implicitly using Copy Constructor
-  - C:\Projects\Logger\src\Logger.cpp(34,1): error C2280: 'Logger::Log::Log(const Logger::Log &)': attempting to reference a deleted function [C:\Projects\Logger\build\Logger.vcxproj]
+### Using Copy Constructor that's Implicitly Delted
+```
+C:\Projects\Logger\src\Logger.cpp(34,1): error C2280: 'Logger::Log::Log(const Logger::Log &)': attempting to reference a deleted function [C:\Projects\Logger\build\Logger.vcxproj]
+```
 
-https://stackoverflow.com/questions/31264984/c-compiler-error-c2280-attempting-to-reference-a-deleted-function-in-visual
-
+The copy constructor is used here.
 ```
 // using implicitly created copy constructor which was deleted
 Logger::Log foo = Logger::Log::Log("sample.log");
 ```
- If the class definition declares a move constructor or move assignment operator, the implicitly declared copy constructor is defined as deleted
-   - Where is the move constructor or move assignment operator defined?
+
+https://en.cppreference.com/w/cpp/language/copy_constructor
+  - Copy constructor is deleted implicitly because:
+    - T has non-static data members that cannot be copied (have deleted, inaccessible, or ambiguous copy constructors)
+
+http://www.cplusplus.com/reference/fstream/ofstream/ofstream/
+  - std::ofstream deletes the copy constructor, therefore, my Log object implicitly deletes the copy constructor as well
+
+`Logger::Log foo = Logger::Log::Log("sample.log")` semantically (before C++17) creates a temporary Logger::Log using the string, and then uses the copy constructor to initialise foo with that temporary - and even if the compiler elides the copy it is required to diagnose the semantic use of the copy constructor. From C++17, the temporary will be elided. Before C++17, the fix is to change the definition to Logger::Log foo ("sample.log")
+
+**Takeaway**: Prefer uniform/aggregate initialization.

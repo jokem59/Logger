@@ -2,35 +2,39 @@
 
 namespace Logger
 {
+    enum class Level
+    {
+        DEBUG,
+        INFO,
+        WARNING,
+        ERROR
+    };
+
     class Log
     {
     private:
         std::string filename;
         std::ofstream logFile;
 
-    public:
-        enum class Level
-        {
-            DEBUG,
-            INFO,
-            WARNING,
-            ERROR
-        };
+        std::mutex fileMutex;
 
+    public:
         Log(std::string file);
         ~Log();
 
         template<typename T>
         void Write(Level lvl, T arg)
         {
-            logFile << arg;
+            //const std::lock_guard<std::mutex> lock(fileMutex);
+            logFile << std::noskipws << arg << '\n';
             return;
         }
 
         template<typename T, typename... Args>
         void Write(Level lvl, T firstArg, Args... args)
         {
-            logFile << firstArg;
+            //const std::lock_guard<std::mutex> lock(fileMutex);
+            logFile << std::noskipws << firstArg;
             Write(lvl, args...);
             return;
         }
