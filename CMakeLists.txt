@@ -17,3 +17,8 @@ set(Logger CMAKE_CXX_STANDARD_REQRUIED True)
 target_include_directories(Logger PUBLIC
                            "${CMAKE_SOURCE_DIR}/inc"
                            )
+
+
+if (UNIX)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+endif (UNIX)
