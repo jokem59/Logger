@@ -3,7 +3,7 @@
 #include <fstream>
 #include <thread>
 #include <mutex>
-#include "logger.h"
+#include "Logger.h"
 #include "LoggerConfig.h"
 
 Logger::Log GFoo{"sample.log"};
