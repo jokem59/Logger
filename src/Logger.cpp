@@ -7,7 +7,6 @@
 #include "LoggerConfig.h"
 
 Logger::Log GFoo{"sample.log"};
-std::mutex fileMutex;
 
 Logger::Log::Log(std::string file) : filename{ file }
 {
@@ -24,6 +23,7 @@ Logger::Log::~Log()
 
 void TestWrite()
 {
+    std::cout << "Calling TestWrite\n";
     GFoo.Write(Logger::Level::INFO,
                "One Two Three Four");
     GFoo.Write(Logger::Level::INFO,
@@ -38,13 +38,13 @@ int main()
     std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
               << LOGGER_VERSION_MINOR << std::endl;
 
+    GFoo.Write(Logger::Level::INFO,
+               "Testing ",
+               123,
+               " hahaha");
+
     std::thread t1(TestWrite);
     std::thread t2(TestWrite);
-
-    GFoo.Write(Logger::Level::INFO,
-              "Testing ",
-              123,
-              " hahaha");
 
     t1.join();
     t2.join();

@@ -15,8 +15,7 @@ namespace Logger
     private:
         std::string filename;
         std::ofstream logFile;
-
-        std::mutex fileMutex;
+        std::recursive_mutex fileMutex;
 
     public:
         Log(std::string file);
@@ -25,7 +24,7 @@ namespace Logger
         template<typename T>
         void Write(Level lvl, T arg)
         {
-            //const std::lock_guard<std::mutex> lock(fileMutex);
+            std::lock_guard<std::recursive_mutex> lock(fileMutex);
             logFile << std::noskipws << arg << '\n';
             return;
         }
@@ -33,7 +32,7 @@ namespace Logger
         template<typename T, typename... Args>
         void Write(Level lvl, T firstArg, Args... args)
         {
-            //const std::lock_guard<std::mutex> lock(fileMutex);
+            std::lock_guard<std::recursive_mutex> lock(fileMutex);
             logFile << std::noskipws << firstArg;
             Write(lvl, args...);
             return;
