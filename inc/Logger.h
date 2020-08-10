@@ -10,6 +10,8 @@ namespace Logger
         ERROR
     };
 
+    std::string GetTime();
+
     class Log
     {
     private:

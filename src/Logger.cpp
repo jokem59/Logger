@@ -5,20 +5,30 @@
 #include <mutex>
 #include "Logger.h"
 #include "LoggerConfig.h"
+#include "date.h"
 
 Logger::Log GFoo{"sample.log"};
 
 Logger::Log::Log(std::string file) : filename{ file }
 {
-    logFile = std::ofstream(filename, std::ios::out);
+    auto now = Logger::GetTime();
+    auto fullName =  now + "_" + filename;
+    logFile = std::ofstream(fullName, std::ios::out);
 }
 
 Logger::Log::~Log()
 {
-    // Wait and take write mutex
+    std::lock_guard<std::recursive_mutex> lock(fileMutex);
 
-    // Close file
     logFile.close();
+}
+
+std::string
+Logger::GetTime()
+{
+    using namespace std::chrono;
+    auto now = time_point_cast<milliseconds>(system_clock::now());
+    return date::format("%F_%T", now);
 }
 
 void TestWrite()
