@@ -3,6 +3,7 @@
 #include <fstream>
 #include <thread>
 #include <mutex>
+#include <sstream>
 #include "Logger.h"
 #include "LoggerConfig.h"
 #include "date.h"
@@ -14,14 +15,25 @@ Logger::Log::Log(std::string file) : filename{ file }
     auto now = Logger::GetTime();
     auto fullName =  now + "_" + filename;
     logFile = std::ofstream(fullName, std::ios::out);
+
+    inStr = std::stringstream("", std::ios_base::ate | std::ios_base::out | std::ios_base::in);
 }
 
 Logger::Log::~Log()
 {
-    std::lock_guard<std::recursive_mutex> lock(fileMutex);
+    std::lock_guard<std::mutex> lock(fileMutex);
 
     logFile.close();
 }
+
+void
+Logger::Log::ClearStrStream()
+{
+    inStr.str("");
+
+    return;
+}
+
 
 std::string
 Logger::GetTime()
