@@ -1,9 +1,10 @@
-#include <iostream>
-#include <string>
 #include <fstream>
-#include <thread>
+#include <iostream>
 #include <mutex>
 #include <sstream>
+#include <string>
+#include <thread>
+
 #include "Logger.h"
 #include "LoggerConfig.h"
 #include "date.h"
@@ -43,7 +44,8 @@ Logger::GetTime()
     return date::format("%F_%T", now);
 }
 
-void TestWrite()
+void
+TestWrite()
 {
     std::cout << "Calling TestWrite\n";
     GFoo.Write(Logger::Level::INFO,

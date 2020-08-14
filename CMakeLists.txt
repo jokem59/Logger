@@ -11,8 +11,9 @@ configure_file("${CMAKE_SOURCE_DIR}/inc/LoggerConfig.h.in"
 add_executable(Logger src/Logger.cpp)
 
 # Specify C++ standard
-set(Logger CMAKE_CXX_STANDARD 17)
-set(Logger CMAKE_CXX_STANDARD_REQRUIED True)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
 target_include_directories(Logger PUBLIC
                            "${CMAKE_SOURCE_DIR}/inc"
