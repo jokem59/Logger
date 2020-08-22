@@ -6,9 +6,9 @@
 #include <string>
 #include <thread>
 
-#include "Logger.h"
-#include "LoggerConfig.h"
-#include "date.h"
+#include "../inc/Logger.h"
+#include "../inc/LoggerConfig.h"
+#include "../inc/date.h"
 
 /*
   Objectives:
@@ -20,9 +20,15 @@
 
 Logger::Log GLogObject("LoggerTest.log");
 
-void WriteToLog(std::string
-
 int main()
 {
+    std::cout << "Testing Logger Version: " << LOGGER_VERSION_MAJOR << "."
+              << LOGGER_VERSION_MINOR << std::endl;
 
+    GLogObject.Write(Logger::Level::INFO,
+                     "Testing ",
+                     123,
+                     " hahha");
+
+    return 0;
 }

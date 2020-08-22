@@ -10,6 +10,9 @@ Calling subsequent constructors on std::ofstream with the same file name result 
   - Whichever directory 'cmake' is called from is where the build files will be generated.
     - How do you specify where you want build files to go in CMakeLists.txt?  You don't.  CMake builds in whatever directory 'cmake' is called from
 
+  - Top-level CMakeLists.txt can call sub-directory CMakeLists.txt by using `add_subdirectory()` command
+    - In this project, we call the `add_subdirectory("./test")` to build the unit test executable
+
 ## C++ Learnings
 
 ### Using Copy Constructor that's Implicitly Delted

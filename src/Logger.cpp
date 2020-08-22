@@ -9,8 +9,6 @@
 #include "LoggerConfig.h"
 #include "date.h"
 
-Logger::Log GFoo{"sample.log"};
-
 Logger::Log::Log(std::string file) : filename{ file }
 {
     auto now = Logger::GetTime();
@@ -44,34 +42,34 @@ Logger::GetTime()
     return date::format("%F_%T", now);
 }
 
-void
-TestWrite()
-{
-    std::cout << "Calling TestWrite\n";
-    GFoo.Write(Logger::Level::INFO,
-               "One Two Three Four");
-    GFoo.Write(Logger::Level::INFO,
-               "Five Six Seven Eight");
+// void
+// TestWrite()
+// {
+//     std::cout << "Calling TestWrite\n";
+//     GFoo.Write(Logger::Level::INFO,
+//                "One Two Three Four");
+//     GFoo.Write(Logger::Level::INFO,
+//                "Five Six Seven Eight");
 
-    return;
-}
+//     return;
+// }
 
-int main()
-{
-    // report version
-    std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
-              << LOGGER_VERSION_MINOR << std::endl;
+// int main()
+// {
+//     // report version
+//     std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
+//               << LOGGER_VERSION_MINOR << std::endl;
 
-    GFoo.Write(Logger::Level::INFO,
-               "Testing ",
-               123,
-               " hahaha");
+//     GFoo.Write(Logger::Level::INFO,
+//                "Testing ",
+//                123,
+//                " hahaha");
 
-    std::thread t1(TestWrite);
-    std::thread t2(TestWrite);
+//     std::thread t1(TestWrite);
+//     std::thread t2(TestWrite);
 
-    t1.join();
-    t2.join();
+//     t1.join();
+//     t2.join();
 
-    return 0;
-}
+//     return 0;
+// }
