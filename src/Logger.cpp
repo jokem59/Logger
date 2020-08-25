@@ -52,7 +52,6 @@ Logger::Log::ClearStrStream()
     return;
 }
 
-
 std::string
 Logger::GetTime()
 {
@@ -60,35 +59,3 @@ Logger::GetTime()
     auto now = time_point_cast<milliseconds>(system_clock::now());
     return date::format("%F_%T", now);
 }
-
-// void
-// TestWrite()
-// {
-//     std::cout << "Calling TestWrite\n";
-//     GFoo.Write(Logger::Level::INFO,
-//                "One Two Three Four");
-//     GFoo.Write(Logger::Level::INFO,
-//                "Five Six Seven Eight");
-
-//     return;
-// }
-
-// int main()
-// {
-//     // report version
-//     std::cout << " Version " << LOGGER_VERSION_MAJOR << "."
-//               << LOGGER_VERSION_MINOR << std::endl;
-
-//     GFoo.Write(Logger::Level::INFO,
-//                "Testing ",
-//                123,
-//                " hahaha");
-
-//     std::thread t1(TestWrite);
-//     std::thread t2(TestWrite);
-
-//     t1.join();
-//     t2.join();
-
-//     return 0;
-// }
