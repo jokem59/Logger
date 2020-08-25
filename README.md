@@ -18,6 +18,30 @@ Calling subsequent constructors on std::ofstream with the same file name result 
 
 ## C++ Learnings
 
+### Windows vs Linux
+In Linux, the constructor:
+```
+Logger::Log::Log(std::string file) : filename{ file }
+{
+    auto now = Logger::GetTime();
+    auto fullName =  now + "_" + filename;
+    logFile = std::ofstream(fullName, std::ios::out); // Opens the file to write to
+
+    inStr = std::stringstream("", std::ios_base::ate | std::ios_base::out | std::ios_base::in);
+}
+```
+
+Successfully opens and writes to the specified log file name.
+
+In Windows, this project builds and runs, but nothing is written to a file within the project's directories.  When adding a test `std::ofstream` that is run as part of `main()` in LoggerUnitTest, a file is successfully written:
+```
+    std::ofstream ofs("test.txt", std::ios::out);
+    ofs << "asd;lfkjalsdfj";
+    ofs.close();
+```
+
+Files that are being created from the LogObject's constructor fail to create the file!
+
 ### Using Copy Constructor that's Implicitly Delted
 ```
 C:\Projects\Logger\src\Logger.cpp(34,1): error C2280: 'Logger::Log::Log(const Logger::Log &)': attempting to reference a deleted function [C:\Projects\Logger\build\Logger.vcxproj]
