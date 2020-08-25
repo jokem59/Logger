@@ -13,6 +13,9 @@ Calling subsequent constructors on std::ofstream with the same file name result 
   - Top-level CMakeLists.txt can call sub-directory CMakeLists.txt by using `add_subdirectory()` command
     - In this project, we call the `add_subdirectory("./test")` to build the unit test executable
 
+  - Use `target_include_directories` command to specify where the compiler should look for header files  to avoid doing things like: `#include "../inc/Logger.h"`
+    - The equivalent command for the linker to look for libraries is `link_directories`
+
 ## C++ Learnings
 
 ### Using Copy Constructor that's Implicitly Delted

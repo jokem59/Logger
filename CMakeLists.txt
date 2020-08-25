@@ -7,7 +7,7 @@ project(Logger VERSION 1.0)
 configure_file("${CMAKE_SOURCE_DIR}/inc/LoggerConfig.h.in"
                "${CMAKE_SOURCE_DIR}/inc/LoggerConfig.h")
 
-# Add exectuable
+# Add Static Library
 add_library(Logger
             STATIC
             src/Logger.cpp)

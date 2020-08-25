@@ -15,7 +15,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-target_include_directories(Logger PUBLIC
+target_include_directories(LoggerUnitTest PUBLIC
                            "${CMAKE_SOURCE_DIR}/inc"
                            )
 

@@ -7,9 +7,9 @@
 #include <thread>
 #include <functional>
 
-#include "../inc/Logger.h"
-#include "../inc/LoggerConfig.h"
-#include "../inc/date.h"
+#include "Logger.h"
+#include "LoggerConfig.h"
+#include "date.h"
 
 /*
   Objectives:
