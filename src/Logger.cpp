@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include <thread>
+#include <unordered_map>
 
 #include "Logger.h"
 #include "LoggerConfig.h"
@@ -23,6 +24,24 @@ Logger::Log::~Log()
     std::lock_guard<std::mutex> lock(fileMutex);
 
     logFile.close();
+}
+
+std::string
+Logger::Log::LevelToString(Level lvl)
+{
+    switch(lvl)
+    {
+    case Logger::Level::DEBUG:
+        return "DEBUG";
+    case Logger::Level::INFO:
+        return "INFO";
+    case Logger::Level::WARNING:
+        return "WARNING";
+    case Logger::Level::ERROR:
+        return "ERROR";
+    default:
+        return "UNDEFINED";
+    }
 }
 
 void
