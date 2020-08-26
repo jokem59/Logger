@@ -5,7 +5,6 @@
 #include <sstream>
 #include <string>
 #include <thread>
-#include <functional>
 
 #include "Logger.h"
 #include "LoggerConfig.h"

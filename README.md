@@ -42,6 +42,14 @@ In Windows, this project builds and runs, but nothing is written to a file withi
 
 Files that are being created from the LogObject's constructor fail to create the file!
 
+When hard coding a string in the Log constructor `logFile.open("whatever")`, the file opens successfully.
+
+When using the class member variable `filename`, the file opens successfully as well.  There's something about the temporary variable `fullName` that is causing issues.
+
+**SOLUTION**: The date/time format was using illegal characters for Windows file names per [Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/fileio/naming-a-file).  The colon `:` and forward slash `/` characters are reserved and attempting to open a file with those characters will fail.
+  - Old date format: 2020/08/25_23:15:12.123
+  - New date format: 2020.08.25-23.15.12.123
+
 ### Using Copy Constructor that's Implicitly Delted
 ```
 C:\Projects\Logger\src\Logger.cpp(34,1): error C2280: 'Logger::Log::Log(const Logger::Log &)': attempting to reference a deleted function [C:\Projects\Logger\build\Logger.vcxproj]
