@@ -54,13 +54,13 @@ int main()
     std::cout << "Testing Logger Version: " << LOGGER_VERSION_MAJOR << "."
               << LOGGER_VERSION_MINOR << std::endl;
 
-    std::thread t1(TestMultipleTypes);
-    std::thread t2(WriteToLogger);
+    auto t1{std::thread(TestMultipleTypes)};
+    auto t2{std::thread(WriteToLogger)};
     WriteToLogger();
-    std::thread t3(WriteToLogger);
+    auto t3{std::thread(WriteToLogger)};
     WriteToLogger();
-    std::thread t4(WriteToLogger);
-    std::thread t5(WriteToLogger);
+    auto t4{std::thread(WriteToLogger)};
+    auto t5{std::thread(WriteToLogger)};
 
     t1.join();
     t2.join();

@@ -12,8 +12,8 @@
 
 Logger::Log::Log(std::string file) : filename{ file }
 {
-    auto now = Logger::GetTime();
-    auto fullName =  now + "_" + filename;
+    auto now{Logger::GetTime()};
+    auto fullName{now + "_" + filename};
     logFile.open(fullName);
 
     inStr = std::stringstream("", std::ios_base::ate | std::ios_base::out | std::ios_base::in);
@@ -56,6 +56,6 @@ std::string
 Logger::GetTime()
 {
     using namespace std::chrono;
-    auto now = time_point_cast<milliseconds>(system_clock::now());
+    auto now{time_point_cast<milliseconds>(system_clock::now())};
     return date::format("%Y.%m.%d-%H.%M.%S", now);
 }
